@@ -9,11 +9,11 @@
       background-color: rgb(72, 75, 82);
       color :cornsilk;
     }
-    form{
+    div{
       margin : 50px auto;
       padding : 10px;
       width : 60vw;
-      font-size: 20px;
+      text-align: center;
     }
     input{
       width : 30vw;
@@ -31,13 +31,54 @@
       font-size: 20px;
       padding : 10px;
     }
+    #output{
+      background-color: rgb(255, 255, 99);
+      color :rgb(24, 170, 237);
+      display :none;
+    }
   </style>
 </head>
 <body>
-  <form action="/weather" method="GET">
+  <div>
     <input type="text" id='cityName' name='city' placeholder=" city name">
     <button type="submit">submit</button>
-  </form>
+  </div>
+
+  <div id='output'></div>
+
+  <script>
+    let button = document.querySelector('button');
+    let searchBar = document.querySelector('input');
+    let output = document.getElementById('output')
+    button.addEventListener('click',(event)=>{
+      let url = `http://localhost:8080/weather?${searchBar.name}=${searchBar.value}`
+      console.log(url);
+      fetch(url)
+      .then((response)=>{
+        console.log(response);
+        return response.json();
+      })
+      .then((weatherObject)=>{
+        console.log(weatherObject);
+
+        let temp = weatherObject.main.temp;
+        let weather = weatherObject.weather[0].main;
+        let description = weatherObject.weather[0].description;
+        let cityName = weatherObject.name
+        let {lon,lat} = weatherObject.coord;
+        let htag = document.createElement('h3');
+        let text = document.createTextNode(`${cityName}  ${lat}°N  ${lon}°E`);
+        htag.appendChild(text);
+        output.appendChild(htag);
+        let ptag = document.createElement('p');
+        text = document.createTextNode(`weather : ${weather}  description : ${description}   temp : ${temp}K`);
+        ptag.appendChild(text);
+        output.appendChild(ptag);
+        output.style.display='block';
+      })
+      .catch((error)=>console.log('Error : '+error));
+    })
+  </script>
   
 </body>
 </html>
