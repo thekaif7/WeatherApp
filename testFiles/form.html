@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather APP testpage</title>
+  <style>
+    body{
+      background-color: rgb(72, 75, 82);
+      color :cornsilk;
+    }
+    form{
+      margin : 50px auto;
+      padding : 10px;
+      width : 60vw;
+      font-size: 20px;
+    }
+    input{
+      width : 30vw;
+      height: 3rem;
+      font-size: 20px;
+      border:none;
+      border-radius : 10px;
+      outline: none;
+    }
+    button{
+      border : none;
+      background-color: rgb(24, 170, 237);
+      border-radius: 3px;
+      color : #fffcfc;
+      font-size: 20px;
+      padding : 10px;
+    }
+  </style>
+</head>
+<body>
+  <form action="/weather" method="GET">
+    <input type="text" id='cityName' name='city' placeholder=" city name">
+    <button type="submit">submit</button>
+  </form>
+  
+</body>
+</html>
